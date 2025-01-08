@@ -3,7 +3,9 @@ package com.lmorda.design.theme
 import android.app.Activity
 import android.view.View
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -19,7 +21,7 @@ import com.lmorda.design.R
 private val LightColorScheme = lightColorScheme(
     primary = BrandLight,
     background = White,
-    onPrimary = White,
+    onPrimary = Black,
     onBackground = Grey220,
 )
 
@@ -58,47 +60,52 @@ fun HomeworkTheme(
 fun View.updateStatusBarColors(
     isAppearanceLightStatusBars: Boolean,
     isAppearanceLightNavigationBars: Boolean,
-    statusBarColor: Color = if (isAppearanceLightStatusBars) {
-        BrandLight
-    } else {
-        BrandDark
+    statusBarColor: Color = when {
+        isAppearanceLightStatusBars -> White
+        else -> BrandDark
     },
-    navigationBarColor: Color = if (isAppearanceLightNavigationBars) {
-        BrandLight
-    } else {
-        BrandDark
+    navigationBarColor: Color = when {
+        isAppearanceLightNavigationBars -> White
+        else -> BrandDark
     },
 ) {
     if (!isInEditMode) {
         val window = (context as Activity).window
         window.statusBarColor = statusBarColor.toArgb()
-        WindowCompat.getInsetsController(window, this).isAppearanceLightStatusBars = isAppearanceLightStatusBars
+        WindowCompat.getInsetsController(window, this).isAppearanceLightStatusBars =
+            isAppearanceLightStatusBars
         window.navigationBarColor = navigationBarColor.toArgb()
-        WindowCompat.getInsetsController(window, this).isAppearanceLightNavigationBars = isAppearanceLightNavigationBars
+        WindowCompat.getInsetsController(window, this).isAppearanceLightNavigationBars =
+            isAppearanceLightNavigationBars
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun topAppBarColors() = TopAppBarColors(
+    containerColor = MaterialTheme.colorScheme.background,
+    titleContentColor = MaterialTheme.colorScheme.background,
+    actionIconContentColor = MaterialTheme.colorScheme.background,
+    navigationIconContentColor = MaterialTheme.colorScheme.background,
+    scrolledContainerColor = MaterialTheme.colorScheme.background,
+)
 
-val dimenSmall: Dp
+val smallSize: Dp
     @Composable get() =
-    dimensionResource(id = R.dimen.small)
+        dimensionResource(id = R.dimen.small)
 
-val dimenMedium: Dp
+val mediumSize: Dp
     @Composable get() =
-    dimensionResource(id = R.dimen.medium)
+        dimensionResource(id = R.dimen.medium)
 
-val dimenDefault: Dp
+val standardSize: Dp
     @Composable get() =
-    dimensionResource(id = R.dimen.standard)
+        dimensionResource(id = R.dimen.standard)
 
-val dimenMediumLarge: Dp
+val mediumLargeSize: Dp
     @Composable get() =
         dimensionResource(id = R.dimen.medium_large)
 
-val dimenLarge: Dp
+val largeSize: Dp
     @Composable get() =
         dimensionResource(id = R.dimen.large)
-
-val dimenXLarge: Dp
-    @Composable get() =
-    dimensionResource(id = R.dimen.xlarge)
