@@ -17,7 +17,7 @@ fun PaginationEffect(
     scrollToLastVisibleItemOnLoadMore: Boolean = false,
     onLoadMore: () -> Unit,
 ) {
-    require(buffer >= 0) { "Buffer must be non-negative." }
+    require(buffer >= 0) { "Paging buffer must be non-negative." }
 
     val shouldLoadMore = remember {
         derivedStateOf { listState.shouldLoadMore(buffer) }

@@ -19,7 +19,7 @@ object DataModule {
 
     private fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY // Log request and response bodies
+            level = HttpLoggingInterceptor.Level.BASIC
         }
     }
 
