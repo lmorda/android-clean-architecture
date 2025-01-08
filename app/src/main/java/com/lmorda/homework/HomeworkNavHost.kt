@@ -5,7 +5,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.lmorda.explore.ExploreScreenRoute
+import com.lmorda.explore.list.ExploreScreenRoute
 
 const val routeExplore = "explore"
 

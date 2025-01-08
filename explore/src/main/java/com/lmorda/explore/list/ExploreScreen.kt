@@ -1,4 +1,4 @@
-package com.lmorda.explore
+package com.lmorda.explore.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -63,6 +63,7 @@ import com.lmorda.design.theme.smallSize
 import com.lmorda.design.theme.topAppBarColors
 import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
+import com.lmorda.explore.R
 
 @Composable
 fun ExploreScreenRoute(

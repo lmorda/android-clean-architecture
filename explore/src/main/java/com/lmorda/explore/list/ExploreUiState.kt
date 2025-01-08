@@ -1,4 +1,4 @@
-package com.lmorda.explore
+package com.lmorda.explore.list
 
 import com.lmorda.domain.model.GithubRepo
 

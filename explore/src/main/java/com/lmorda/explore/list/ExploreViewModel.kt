@@ -1,9 +1,9 @@
-package com.lmorda.explore
+package com.lmorda.explore.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lmorda.domain.DataRepository
-import com.lmorda.explore.ExploreContract.State
+import com.lmorda.explore.list.ExploreContract.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
