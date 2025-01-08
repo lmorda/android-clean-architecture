@@ -12,5 +12,6 @@ dependencies {
     implementation(project(":design"))
     implementation(project(":domain"))
     implementation(libs.compose.glide)
+    implementation(libs.lottie)
     androidTestImplementation(libs.androidx.ui.test.junit4)
 }
