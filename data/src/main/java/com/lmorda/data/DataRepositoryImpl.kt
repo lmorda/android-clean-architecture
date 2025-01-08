@@ -6,22 +6,25 @@ import com.lmorda.domain.model.GithubRepo
 import javax.inject.Inject
 import javax.inject.Singleton
 
+const val PER_PAGE = 30
+const val SORT = "stars"
+const val ORDER = "desc"
+const val QUERY = "android"
+
 @Singleton
 class DataRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val mapper: GithubRepoMapper,
 ) : DataRepository {
 
-    override suspend fun getRepos(
-        query: String,
-        page: Int,
-        perPage: Int,
-    ): List<GithubRepo> {
+    override suspend fun getRepos(page: Int): List<GithubRepo> {
         try {
             val repos = apiService.searchRepositories(
-                query = query,
                 page = page,
-                perPage = perPage,
+                perPage = PER_PAGE,
+                query = QUERY,
+                order = ORDER,
+                sort = SORT,
             )
             return mapper.map(repos)
         } catch (ex: Exception) {
