@@ -1,5 +1,6 @@
 <resources>
-    <string name="explore_title">Homework</string>
+    <string name="explore_title">Repositories</string>
     <string name="stargazers">%1$s Stargazers</string>
     <string name="forks_under_construction">%1$s Forks under construction</string>
+    <string name="error_message">Having a bit of trouble finding those repositories!</string>
 </resources>
