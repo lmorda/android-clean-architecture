@@ -1,5 +1,6 @@
 package com.lmorda.data.mapper
 
+import android.util.Log
 import com.lmorda.data.model.GithubRepoDto
 import com.lmorda.data.model.GithubReposDto
 import com.lmorda.domain.model.GithubRepo
@@ -26,6 +27,7 @@ class GithubRepoMapper @Inject constructor() {
                 description = description ?: "",
                 stargazersCount = countPrettyString(stargazersCount),
                 language = language ?: "",
+                defaultBranch = defaultBranch ?: "main",
             )
         }
 

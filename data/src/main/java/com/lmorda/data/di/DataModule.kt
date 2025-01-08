@@ -13,6 +13,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
+const val BASE_URL = "https://api.github.com/"
+
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModule {
@@ -38,7 +40,7 @@ object DataModule {
         val json = Json { ignoreUnknownKeys = true }
 
         return Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory(contentType))
             .build()

@@ -11,7 +11,10 @@ android {
 dependencies {
     implementation(project(":design"))
     implementation(project(":domain"))
+    implementation(project(":utils"))
     implementation(libs.compose.glide)
+    annotationProcessor(libs.compose.glide)
     implementation(libs.lottie)
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    implementation(libs.compose.markdown)
 }

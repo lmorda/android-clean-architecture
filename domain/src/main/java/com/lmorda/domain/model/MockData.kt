@@ -9,6 +9,7 @@ val mockDomainData = listOf(
         description = "description for google my application",
         stargazersCount = "3.45k",
         language = "kotlin",
+        defaultBranch = "main",
     ),
     GithubRepo(
         id = 1,
@@ -18,5 +19,6 @@ val mockDomainData = listOf(
         description = "description for google my application 2",
         stargazersCount = "3.45k",
         language = "kotlin",
+        defaultBranch = "main",
     ),
 )

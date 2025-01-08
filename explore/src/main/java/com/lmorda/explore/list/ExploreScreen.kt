@@ -68,12 +68,14 @@ import com.lmorda.explore.R
 @Composable
 fun ExploreScreenRoute(
     viewModel: ExploreViewModel,
+    onNavigateToDetails: (Long) -> Unit,
 ) {
     val state = viewModel.state.collectAsState().value
     ExploreScreen(
         state = state,
         onNextPage = viewModel::getNextPage,
-        onRefresh = viewModel::onRefresh
+        onRefresh = viewModel::onRefresh,
+        onNavigateToDetails = onNavigateToDetails,
     )
 }
 
@@ -83,6 +85,7 @@ private fun ExploreScreen(
     state: ExploreContract.State,
     onNextPage: () -> Unit,
     onRefresh: () -> Unit,
+    onNavigateToDetails: (Long) -> Unit,
 ) {
     val listState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -106,7 +109,12 @@ private fun ExploreScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            ExploreContent(state, listState, onNextPage)
+            ExploreContent(
+                state = state,
+                listState = listState,
+                onNextPage = onNextPage,
+                onNavigateToDetails = onNavigateToDetails,
+            )
         }
     }
 }
@@ -124,12 +132,17 @@ private fun ExploreTitle() {
 private fun ExploreContent(
     state: ExploreContract.State,
     listState: LazyListState,
-    onNextPage: () -> Unit
+    onNextPage: () -> Unit,
+    onNavigateToDetails: (Long) -> Unit,
 ) {
     when {
         state.exception != null -> ExploreLoadingError()
         state.isFirstLoad -> ExploreProgressIndicator()
-        else -> ExploreList(listState, state)
+        else -> ExploreList(
+            listState = listState,
+            state = state,
+            onNavigateToDetails = onNavigateToDetails,
+        )
     }
     if (!state.isLoading()) {
         PaginationEffect(
@@ -143,14 +156,15 @@ private fun ExploreContent(
 @Composable
 private fun ExploreList(
     listState: LazyListState,
-    state: ExploreContract.State
+    state: ExploreContract.State,
+    onNavigateToDetails: (Long) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         state = listState,
     ) {
         items(state.githubRepos) { details ->
-            ExploreItem(details = details, onNavigateToDetails = {})
+            ExploreItem(details = details, onNavigateToDetails = onNavigateToDetails)
         }
         if (state.isFetchingNextPage) {
             item { ExploreNextPageIndicator() }
@@ -353,6 +367,7 @@ private fun ExploreScreenPreview() {
             ),
             onNextPage = {},
             onRefresh = {},
+            onNavigateToDetails = {},
         )
     }
 }
