@@ -1,10 +1,13 @@
 package com.lmorda.explore.details
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -17,12 +20,18 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.lmorda.design.theme.largeSize
+import com.lmorda.design.theme.mediumSize
+import com.lmorda.design.theme.standardSize
 import com.lmorda.design.theme.topAppBarColors
-import com.lmorda.domain.model.GithubRepo
 import com.lmorda.explore.R
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
@@ -78,8 +87,12 @@ fun DetailsScreen(
         LazyColumn(
             modifier = Modifier.padding(contentPadding).fillMaxSize()
         ) {
-            state.githubRepo?.let {
-                item { DetailsContent(githubRepo = it, readmeContent = state.readmeContent) }
+            if (state.exception != null) {
+                item { DetailsLoadingError() }
+            } else {
+                state.githubRepo?.let {
+                    item { DetailsContent(readmeContent = state.readmeContent) }
+                }
             }
         }
     }
@@ -87,8 +100,44 @@ fun DetailsScreen(
 
 
 @Composable
-fun DetailsContent(githubRepo: GithubRepo, readmeContent: String?) {
+fun DetailsContent(readmeContent: String?) {
+    Row(modifier = Modifier.padding(standardSize), verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = Icons.Default.Menu,
+            contentDescription = "Readme",
+            tint = MaterialTheme.colorScheme.onBackground,
+        )
+        Text(
+            modifier = Modifier.padding(start = mediumSize),
+            text = "README",
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+
+    }
     MarkdownText(
         modifier = Modifier.padding(horizontal = largeSize),
         markdown = readmeContent!!)
+}
+
+
+@Composable
+private fun DetailsLoadingError() {
+    Box(modifier = Modifier.padding(standardSize)) {
+        val composition by rememberLottieComposition(
+            spec = LottieCompositionSpec.RawRes(R.raw.loading_error)
+        )
+        val progress by animateLottieCompositionAsState(
+            composition = composition
+        )
+        Text(
+            text = stringResource(id = R.string.details_error),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+        LottieAnimation(
+            composition = composition,
+            progress = { progress },
+        )
+    }
 }

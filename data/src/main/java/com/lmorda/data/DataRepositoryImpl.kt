@@ -9,11 +9,6 @@ import java.net.URL
 import javax.inject.Inject
 import javax.inject.Singleton
 
-const val PER_PAGE = 30
-const val SORT = "stars"
-const val ORDER = "desc"
-const val QUERY = "android"
-
 @Singleton
 class DataRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
@@ -24,10 +19,10 @@ class DataRepositoryImpl @Inject constructor(
         mapper.map(
             githubReposDto = apiService.searchRepositories(
                 page = page,
-                perPage = PER_PAGE,
-                query = QUERY,
-                order = ORDER,
-                sort = SORT,
+                perPage = 30,
+                query = "android",
+                order = "desc",
+                sort = "stars",
             )
         )
 

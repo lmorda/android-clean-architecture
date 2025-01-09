@@ -217,7 +217,7 @@ private fun ExploreLoadingError() {
             composition = composition
         )
         Text(
-            text = stringResource(id = R.string.error_message),
+            text = stringResource(id = R.string.list_error),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
         )

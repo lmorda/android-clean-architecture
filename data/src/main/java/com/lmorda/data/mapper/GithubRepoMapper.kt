@@ -26,7 +26,7 @@ class GithubRepoMapper @Inject constructor() {
                 ),
                 description = description ?: "",
                 stargazersCount = countPrettyString(stargazersCount),
-                language = language ?: "",
+                language = language ?: "Informational",
                 defaultBranch = defaultBranch ?: "main",
             )
         }
