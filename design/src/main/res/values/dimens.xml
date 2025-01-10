@@ -4,4 +4,5 @@
     <dimen name="standard">16dp</dimen>
     <dimen name="medium_large">24dp</dimen>
     <dimen name="large">32dp</dimen>
+    <dimen name="xlarge">128dp</dimen>
 </resources>

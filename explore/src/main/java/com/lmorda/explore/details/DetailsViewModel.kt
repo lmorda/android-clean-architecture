@@ -31,16 +31,8 @@ class DetailsViewModel @Inject constructor(
             viewModelScope.launch {
                 try {
                     val githubRepo = dataRepository.getRepo(id = repoId)
-                    val readmeContent = with (githubRepo) {
-                        dataRepository.downloadTextFromUrl(
-                            owner = owner.login,
-                            name = name,
-                            branch = defaultBranch,
-                        )!!
-                    }
                     _state.value = state.value.copy(
                         githubRepo = githubRepo,
-                        readmeContent = readmeContent,
                     )
                 } catch (ex: Exception) {
                     _state.value = state.value.copy(
@@ -52,6 +44,8 @@ class DetailsViewModel @Inject constructor(
     }
 
     fun shareRepo() {
-        shareIntentController.shareText(state.value.githubRepo?.name ?: "Ah shit son")
+        state.value.githubRepo?.let { repo ->
+            shareIntentController.shareText(repo.owner.htmlUrl)
+        }
     }
 }

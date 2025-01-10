@@ -16,13 +16,9 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -47,23 +43,18 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.lmorda.design.theme.Blue80
 import com.lmorda.design.theme.DayAndNightPreview
-import com.lmorda.design.theme.Green80
 import com.lmorda.design.theme.HomeworkTheme
-import com.lmorda.design.theme.Orange80
 import com.lmorda.design.theme.PaginationEffect
-import com.lmorda.design.theme.Pink80
-import com.lmorda.design.theme.Yellow80
-import com.lmorda.design.theme.standardSize
 import com.lmorda.design.theme.largeSize
-import com.lmorda.design.theme.mediumLargeSize
 import com.lmorda.design.theme.mediumSize
 import com.lmorda.design.theme.smallSize
+import com.lmorda.design.theme.standardSize
 import com.lmorda.design.theme.topAppBarColors
 import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
 import com.lmorda.explore.R
+import com.lmorda.explore.shared.RepositoryStats
 
 @Composable
 fun ExploreScreenRoute(
@@ -302,60 +293,6 @@ private fun OwnerImage(
         contentDescription = "avatar",
     )
 }
-
-@Composable
-private fun RepositoryStats(details: GithubRepo) {
-    Row(
-        modifier = Modifier
-            .padding(vertical = mediumSize)
-            .fillMaxWidth()
-            .background(color = MaterialTheme.colorScheme.background),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(
-            modifier = Modifier.size(size = mediumLargeSize),
-            imageVector = Icons.Default.Star,
-            tint = Yellow80,
-            contentDescription = "star",
-        )
-        Text(
-            modifier = Modifier.padding(horizontal = mediumSize),
-            text = details.stargazersCount,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onBackground,
-            maxLines = 1,
-        )
-        Icon(
-            modifier = Modifier.size(size = mediumLargeSize),
-            imageVector = Icons.Default.PlayArrow,
-            tint = getLanguageTintColor(details),
-            contentDescription = "language",
-        )
-        Text(
-            modifier = Modifier.padding(start = mediumSize),
-            text = details.language,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onBackground,
-            maxLines = 1,
-        )
-    }
-}
-
-@Composable
-private fun getLanguageTintColor(details: GithubRepo) = details.language
-    .takeIf { it.isNotBlank() }
-    ?.firstOrNull()
-    ?.lowercaseChar()
-    ?.let { char ->
-        when (char) {
-            in 'a'..'e' -> Pink80
-            in 'f'..'i' -> Orange80
-            in 'j'..'p' -> Green80
-            in 'q'..'z' -> Blue80
-            else -> Pink80
-        }
-    } ?: Pink80
-
 
 @Composable
 @DayAndNightPreview

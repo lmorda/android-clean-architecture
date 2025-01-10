@@ -8,5 +8,4 @@ data class GithubRepo(
     val description: String,
     val stargazersCount: String,
     val language: String,
-    val defaultBranch: String,
 )

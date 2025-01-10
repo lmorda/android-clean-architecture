@@ -1,13 +1,15 @@
 package com.lmorda.explore.details
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -23,22 +25,30 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.lmorda.design.theme.largeSize
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.lmorda.design.theme.DayAndNightPreview
+import com.lmorda.design.theme.HomeworkTheme
+import com.lmorda.design.theme.mediumLargeSize
 import com.lmorda.design.theme.mediumSize
 import com.lmorda.design.theme.standardSize
 import com.lmorda.design.theme.topAppBarColors
+import com.lmorda.design.theme.xLargeSize
+import com.lmorda.domain.model.GithubRepo
+import com.lmorda.domain.model.mockDomainData
 import com.lmorda.explore.R
-import dev.jeziellago.compose.markdowntext.MarkdownText
+import com.lmorda.explore.shared.RepositoryStats
 
 @Composable
 fun DetailsScreenRoute(
     viewModel: DetailsViewModel,
-    id: Long = 31792824,
     onBack: () -> Unit,
 ) {
     val state = viewModel.state.collectAsState().value
@@ -56,7 +66,10 @@ fun DetailsScreen(
     onBack: () -> Unit,
     onShare: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    val scrollBehavior = TopAppBarDefaults
+        .enterAlwaysScrollBehavior(
+            state = rememberTopAppBarState()
+        )
     Scaffold(
         topBar = {
             TopAppBar(
@@ -84,15 +97,18 @@ fun DetailsScreen(
             )
         }
     ) { contentPadding ->
-        LazyColumn(
-            modifier = Modifier.padding(contentPadding).fillMaxSize()
+        Column(
+            modifier = Modifier
+                .padding(contentPadding)
+                .padding(vertical = mediumSize, horizontal = mediumLargeSize)
+                .fillMaxSize()
         ) {
-            if (state.exception != null) {
-                item { DetailsLoadingError() }
-            } else {
-                state.githubRepo?.let {
-                    item { DetailsContent(readmeContent = state.readmeContent) }
-                }
+            when {
+                state.exception != null ->
+                    DetailsLoadingError()
+
+                state.githubRepo != null ->
+                    DetailsContent(details = state.githubRepo)
             }
         }
     }
@@ -100,26 +116,44 @@ fun DetailsScreen(
 
 
 @Composable
-fun DetailsContent(readmeContent: String?) {
-    Row(modifier = Modifier.padding(standardSize), verticalAlignment = Alignment.CenterVertically) {
-        Icon(
-            imageVector = Icons.Default.Menu,
-            contentDescription = "Readme",
-            tint = MaterialTheme.colorScheme.onBackground,
+@OptIn(ExperimentalGlideComposeApi::class)
+fun ColumnScope.DetailsContent(details: GithubRepo) {
+    details.owner.avatarUrl.takeIf { it.isNotBlank() }?.let {
+        GlideImage(
+            modifier = Modifier
+                .align(alignment = Alignment.CenterHorizontally)
+                .size(size = xLargeSize)
+                .clip(shape = CircleShape),
+            model = it,
+            contentDescription = "avatar",
         )
-        Text(
-            modifier = Modifier.padding(start = mediumSize),
-            text = "README",
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.onBackground,
-        )
-
-    }
-    MarkdownText(
-        modifier = Modifier.padding(horizontal = largeSize),
-        markdown = readmeContent!!)
+    } ?: Image(
+        modifier = Modifier
+            .align(alignment = Alignment.CenterHorizontally)
+            .size(size = xLargeSize),
+        painter = painterResource(id = R.drawable.ic_android_green_24dp),
+        contentDescription = "avatar",
+    )
+    Text(
+        text = details.owner.login,
+        style = MaterialTheme.typography.headlineLarge,
+        color = MaterialTheme.colorScheme.onBackground,
+        maxLines = 1,
+    )
+    Text(
+        text = details.name,
+        style = MaterialTheme.typography.titleLarge,
+        color = MaterialTheme.colorScheme.onBackground,
+        maxLines = 1,
+    )
+    Text(
+        modifier = Modifier.padding(top = standardSize),
+        text = details.description,
+        style = MaterialTheme.typography.titleLarge,
+        color = MaterialTheme.colorScheme.onBackground,
+    )
+    RepositoryStats(details = details)
 }
-
 
 @Composable
 private fun DetailsLoadingError() {
@@ -138,6 +172,20 @@ private fun DetailsLoadingError() {
         LottieAnimation(
             composition = composition,
             progress = { progress },
+        )
+    }
+}
+
+@Composable
+@DayAndNightPreview
+private fun DetailsScreenPreview() {
+    HomeworkTheme {
+        DetailsScreen(
+            state = DetailsContract.State(
+                githubRepo = mockDomainData[0],
+            ),
+            onBack = {},
+            onShare = {},
         )
     }
 }

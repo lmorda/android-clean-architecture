@@ -109,3 +109,7 @@ val mediumLargeSize: Dp
 val largeSize: Dp
     @Composable get() =
         dimensionResource(id = R.dimen.large)
+
+val xLargeSize: Dp
+    @Composable get() =
+        dimensionResource(id = R.dimen.xlarge)

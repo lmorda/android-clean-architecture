@@ -16,5 +16,4 @@ dependencies {
     annotationProcessor(libs.compose.glide)
     implementation(libs.lottie)
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    implementation(libs.compose.markdown)
 }
