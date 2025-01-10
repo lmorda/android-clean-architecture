@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lmorda.domain.DataRepository
 import com.lmorda.explore.details.DetailsContract.State
-import com.lmorda.utils.ShareIntentController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +17,6 @@ const val SAVED_ID_KEY = "id"
 class DetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val dataRepository: DataRepository,
-    private val shareIntentController: ShareIntentController,
 ) : ViewModel() {
 
     private val id: Long? = savedStateHandle[SAVED_ID_KEY]
@@ -40,12 +38,6 @@ class DetailsViewModel @Inject constructor(
                     )
                 }
             }
-        }
-    }
-
-    fun shareRepo() {
-        state.value.githubRepo?.let { repo ->
-            shareIntentController.shareText(repo.owner.htmlUrl)
         }
     }
 }

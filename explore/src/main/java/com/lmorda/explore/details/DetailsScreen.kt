@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.airbnb.lottie.compose.LottieAnimation
@@ -45,6 +46,7 @@ import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
 import com.lmorda.explore.R
 import com.lmorda.explore.shared.RepositoryStats
+import com.lmorda.utils.shareText
 
 @Composable
 fun DetailsScreenRoute(
@@ -55,7 +57,6 @@ fun DetailsScreenRoute(
     DetailsScreen(
         state = state,
         onBack = onBack,
-        onShare = { viewModel.shareRepo() }
     )
 }
 
@@ -64,7 +65,6 @@ fun DetailsScreenRoute(
 fun DetailsScreen(
     state: DetailsContract.State,
     onBack: () -> Unit,
-    onShare: () -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults
         .enterAlwaysScrollBehavior(
@@ -85,7 +85,10 @@ fun DetailsScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = onShare) {
+                    val context = LocalContext.current
+                    val shareText = state.githubRepo?.owner?.htmlUrl
+                        ?: stringResource(R.string.share_default)
+                    IconButton(onClick = { context.shareText(text = shareText) }) {
                         Icon(
                             imageVector = Icons.Default.Share,
                             contentDescription = "Share",
@@ -185,7 +188,6 @@ private fun DetailsScreenPreview() {
                 githubRepo = mockDomainData[0],
             ),
             onBack = {},
-            onShare = {},
         )
     }
 }
