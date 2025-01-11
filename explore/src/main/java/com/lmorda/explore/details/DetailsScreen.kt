@@ -29,14 +29,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import coil3.compose.AsyncImage
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.lmorda.design.theme.DayAndNightPreview
 import com.lmorda.design.theme.HomeworkTheme
+import com.lmorda.design.theme.largeSize
 import com.lmorda.design.theme.mediumLargeSize
 import com.lmorda.design.theme.mediumSize
 import com.lmorda.design.theme.standardSize
@@ -66,40 +66,37 @@ fun DetailsScreen(
     state: DetailsContract.State,
     onBack: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults
-        .enterAlwaysScrollBehavior(
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(
             state = rememberTopAppBarState()
         )
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = topAppBarColors(),
-                title = { },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = MaterialTheme.colorScheme.onBackground,
-                        )
-                    }
-                },
-                actions = {
-                    val context = LocalContext.current
-                    val shareText = state.githubRepo?.owner?.htmlUrl
-                        ?: stringResource(R.string.share_default)
-                    IconButton(onClick = { context.shareText(text = shareText) }) {
-                        Icon(
-                            imageVector = Icons.Default.Share,
-                            contentDescription = "Share",
-                            tint = MaterialTheme.colorScheme.onBackground,
-                        )
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        }
-    ) { contentPadding ->
+    Scaffold(topBar = {
+        TopAppBar(
+            colors = topAppBarColors(),
+            title = { },
+            navigationIcon = {
+                IconButton(onClick = onBack) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = MaterialTheme.colorScheme.onBackground,
+                    )
+                }
+            },
+            actions = {
+                val context = LocalContext.current
+                val shareText =
+                    state.githubRepo?.owner?.htmlUrl ?: stringResource(R.string.share_default)
+                IconButton(onClick = { context.shareText(text = shareText) }) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = "Share",
+                        tint = MaterialTheme.colorScheme.onBackground,
+                    )
+                }
+            },
+            scrollBehavior = scrollBehavior,
+        )
+    }) { contentPadding ->
         Column(
             modifier = Modifier
                 .padding(contentPadding)
@@ -107,33 +104,29 @@ fun DetailsScreen(
                 .fillMaxSize()
         ) {
             when {
-                state.exception != null ->
-                    DetailsLoadingError()
+                state.exception != null -> DetailsLoadingError()
 
-                state.githubRepo != null ->
-                    DetailsContent(details = state.githubRepo)
+                state.githubRepo != null -> DetailsContent(details = state.githubRepo)
             }
         }
     }
 }
 
-
 @Composable
-@OptIn(ExperimentalGlideComposeApi::class)
 fun ColumnScope.DetailsContent(details: GithubRepo) {
     details.owner.avatarUrl.takeIf { it.isNotBlank() }?.let {
-        GlideImage(
+        AsyncImage(
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
                 .size(size = xLargeSize)
                 .clip(shape = CircleShape),
             model = it,
+            placeholder = painterResource(id = R.drawable.ic_android_green_24dp),
+            error = painterResource(id = R.drawable.ic_android_green_24dp),
             contentDescription = "avatar",
         )
     } ?: Image(
-        modifier = Modifier
-            .align(alignment = Alignment.CenterHorizontally)
-            .size(size = xLargeSize),
+        modifier = Modifier.size(size = largeSize),
         painter = painterResource(id = R.drawable.ic_android_green_24dp),
         contentDescription = "avatar",
     )

@@ -12,8 +12,8 @@ dependencies {
     implementation(project(":design"))
     implementation(project(":domain"))
     implementation(project(":utils"))
-    implementation(libs.compose.glide)
-    annotationProcessor(libs.compose.glide)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.lottie)
     androidTestImplementation(libs.androidx.ui.test.junit4)
 }

@@ -12,7 +12,6 @@ lifecycle = "2.8.7"
 composeBom = "2024.12.01"
 activityCompose = "1.9.3"
 navigationCompose = "2.8.5"
-composeGlide = "1.0.0-beta01"
 
 # Testing
 junit = "4.13.2"
@@ -36,6 +35,8 @@ kotlinxJson = "1.7.1"
 # Other
 timber = "5.0.1"
 lottie = "6.6.2"
+coilCompose = "3.0.4"
+coilNetworkOkhttp = "3.0.4"
 
 [libraries]
 
@@ -59,7 +60,6 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
-compose-glide = { module = "com.github.bumptech.glide:compose", version.ref = "composeGlide" }
 
 # Hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidGradlePlugin" }
@@ -77,6 +77,8 @@ okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 # Other
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
 
 # Testing
 junit = { module = "junit:junit", version.ref = "junit" }

@@ -37,12 +37,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.lmorda.design.theme.DayAndNightPreview
 import com.lmorda.design.theme.HomeworkTheme
 import com.lmorda.design.theme.PaginationEffect
@@ -275,16 +274,17 @@ private fun RepositoryTitle(details: GithubRepo) {
 }
 
 @Composable
-@OptIn(ExperimentalGlideComposeApi::class)
 private fun OwnerImage(
     avatarUrl: String?,
 ) {
     avatarUrl?.takeIf { it.isNotBlank() }?.let {
-        GlideImage(
+        AsyncImage(
             modifier = Modifier
                 .size(size = largeSize)
                 .clip(shape = CircleShape),
             model = avatarUrl,
+            placeholder = painterResource(id = R.drawable.ic_android_green_24dp),
+            error = painterResource(id = R.drawable.ic_android_green_24dp),
             contentDescription = "avatar",
         )
     } ?: Image(
