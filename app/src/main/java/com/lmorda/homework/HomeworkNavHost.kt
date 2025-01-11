@@ -33,7 +33,7 @@ internal fun HomeworkNavHost(navController: NavHostController) {
             route = routeDetailsFull,
             arguments = listOf(
                 navArgument(name = argDetailsId) { type = NavType.LongType },
-            )
+            ),
         ) {
             DetailsScreenRoute(
                 viewModel = hiltViewModel(),
