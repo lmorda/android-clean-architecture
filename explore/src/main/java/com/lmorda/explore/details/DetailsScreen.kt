@@ -1,6 +1,5 @@
 package com.lmorda.explore.details
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -27,16 +26,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import coil3.compose.AsyncImage
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.lmorda.design.theme.DayAndNightPreview
 import com.lmorda.design.theme.HomeworkTheme
-import com.lmorda.design.theme.largeSize
 import com.lmorda.design.theme.mediumLargeSize
 import com.lmorda.design.theme.mediumSize
 import com.lmorda.design.theme.standardSize
@@ -45,6 +41,7 @@ import com.lmorda.design.theme.xLargeSize
 import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
 import com.lmorda.explore.R
+import com.lmorda.explore.shared.AvatarImage
 import com.lmorda.explore.shared.RepositoryStats
 import com.lmorda.utils.shareText
 
@@ -67,8 +64,8 @@ fun DetailsScreen(
     onBack: () -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(
-            state = rememberTopAppBarState()
-        )
+        state = rememberTopAppBarState()
+    )
     Scaffold(topBar = {
         TopAppBar(
             colors = topAppBarColors(),
@@ -114,21 +111,13 @@ fun DetailsScreen(
 
 @Composable
 fun ColumnScope.DetailsContent(details: GithubRepo) {
-    details.owner.avatarUrl.takeIf { it.isNotBlank() }?.let {
-        AsyncImage(
-            modifier = Modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .size(size = xLargeSize)
-                .clip(shape = CircleShape),
-            model = it,
-            placeholder = painterResource(id = R.drawable.ic_android_green_24dp),
-            error = painterResource(id = R.drawable.ic_android_green_24dp),
-            contentDescription = "avatar",
-        )
-    } ?: Image(
-        modifier = Modifier.size(size = largeSize),
-        painter = painterResource(id = R.drawable.ic_android_green_24dp),
-        contentDescription = "avatar",
+    AvatarImage(
+        modifier = Modifier
+            .align(alignment = Alignment.CenterHorizontally)
+            .size(size = xLargeSize)
+            .clip(shape = CircleShape),
+        avatarUrl = details.owner.avatarUrl,
+        size = xLargeSize,
     )
     Text(
         text = details.owner.login,

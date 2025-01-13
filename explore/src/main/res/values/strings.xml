@@ -5,4 +5,5 @@
     <string name="list_error">Having a bit of trouble finding those repositories!</string>
     <string name="details_error">Having a bit of trouble finding this repository!</string>
     <string name="share_default">Homework app is awesome!</string>
+    <string name="informational_repo">Informational</string>
 </resources>

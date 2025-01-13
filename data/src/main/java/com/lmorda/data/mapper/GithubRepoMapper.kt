@@ -26,10 +26,9 @@ class GithubRepoMapper @Inject constructor() {
                 ),
                 description = description ?: "",
                 stargazersCount = countPrettyString(stargazersCount),
-                language = language ?: "Informational",
+                language = language ?: "",
             )
         }
-
 
     private fun countPrettyString(value: Int?): String {
         if (value == null) return ""

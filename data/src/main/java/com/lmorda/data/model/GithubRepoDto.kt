@@ -12,5 +12,4 @@ data class GithubRepoDto(
     @SerialName("description") val description: String?,
     @SerialName("stargazers_count") val stargazersCount: Int?,
     @SerialName("language") val language: String?,
-    @SerialName("default_branch") val defaultBranch: String?,
 )

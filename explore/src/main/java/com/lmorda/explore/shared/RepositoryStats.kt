@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import com.lmorda.design.theme.Blue80
 import com.lmorda.design.theme.Green80
 import com.lmorda.design.theme.Orange80
@@ -23,6 +24,7 @@ import com.lmorda.design.theme.Yellow80
 import com.lmorda.design.theme.mediumLargeSize
 import com.lmorda.design.theme.mediumSize
 import com.lmorda.domain.model.GithubRepo
+import com.lmorda.explore.R
 
 @Composable
 internal fun RepositoryStats(details: GithubRepo) {
@@ -53,7 +55,8 @@ internal fun RepositoryStats(details: GithubRepo) {
         )
         Text(
             modifier = Modifier.padding(start = mediumSize),
-            text = details.language,
+            text = details.language.takeIf { it.isNotBlank() }
+                ?: stringResource(R.string.informational_repo),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
         )
