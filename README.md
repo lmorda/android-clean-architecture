@@ -65,6 +65,13 @@ The project is organized into separate modules to improve code reusability and m
 | MockK                           | For mocking dependencies in unit tests                   |
 | Kotlin                          | Primary programming language                              |
 
+
+## Clean Architecture
+
+This project adheres to clean architecture principles to ensure clear separation of concerns. Unlike the domain layer explanation in the Android Developer documentation, this implementation follows a true clean architecture approach. The data and UI layers are fully decoupled, with the domain layer serving as the intermediary. The domain layer contains only business logic.  
+<img width="1243" alt="Screenshot 2025-01-16 at 8 56 30 AM" src="https://github.com/user-attachments/assets/f0bc299f-e7ef-434c-a8c5-76f54d87e54d" />
+Note: UseCases were not utilized in this project due to its small scope.
+
 ## Testing
 
 This project includes:
