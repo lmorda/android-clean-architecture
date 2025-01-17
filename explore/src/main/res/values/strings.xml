@@ -4,6 +4,6 @@
     <string name="forks_under_construction">%1$s Forks under construction</string>
     <string name="list_error">Having a bit of trouble finding those repositories!</string>
     <string name="details_error">Having a bit of trouble finding this repository!</string>
-    <string name="share_default">Homework app is awesome!</string>
+    <string name="share_default">Clean architecture is awesome!</string>
     <string name="informational_repo">Informational</string>
 </resources>

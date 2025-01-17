@@ -40,7 +40,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.lmorda.design.theme.DayAndNightPreview
-import com.lmorda.design.theme.HomeworkTheme
+import com.lmorda.design.theme.CleanTheme
 import com.lmorda.design.theme.PaginationEffect
 import com.lmorda.design.theme.largeSize
 import com.lmorda.design.theme.mediumSize
@@ -280,7 +280,7 @@ private fun ExploreItemTitle(details: GithubRepo) {
 @Composable
 @DayAndNightPreview
 private fun ExploreScreenPreview() {
-    HomeworkTheme {
+    CleanTheme {
         ExploreScreen(
             state = ExploreContract.State(
                 githubRepos = mockDomainData,

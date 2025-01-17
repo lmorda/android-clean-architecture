@@ -32,7 +32,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.lmorda.design.theme.DayAndNightPreview
-import com.lmorda.design.theme.HomeworkTheme
+import com.lmorda.design.theme.CleanTheme
 import com.lmorda.design.theme.mediumLargeSize
 import com.lmorda.design.theme.mediumSize
 import com.lmorda.design.theme.standardSize
@@ -164,7 +164,7 @@ private fun DetailsLoadingError() {
 @Composable
 @DayAndNightPreview
 private fun DetailsScreenPreview() {
-    HomeworkTheme {
+    CleanTheme {
         DetailsScreen(
             state = DetailsContract.State(
                 githubRepo = mockDomainData[0],

@@ -1,4 +1,4 @@
-package com.lmorda.homework
+package com.lmorda.clean
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -16,7 +16,7 @@ const val argDetailsId = "id"
 const val routeDetailsFull = "$routeDetailsBase/{$argDetailsId}"
 
 @Composable
-internal fun HomeworkNavHost(navController: NavHostController) {
+internal fun CleanNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = routeExplore,

@@ -4,9 +4,9 @@ plugins {
 }
 
 android {
-    namespace = "com.lmorda.homework"
+    namespace = "com.lmorda.clean"
     defaultConfig {
-        applicationId = "com.lmorda.homework"
+        applicationId = "com.lmorda.clean"
     }
 }
 

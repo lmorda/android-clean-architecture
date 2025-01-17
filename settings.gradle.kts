@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Homework"
+rootProject.name = "Clean Architecture"
 include(":app")
 include(":data")
 include(":design")

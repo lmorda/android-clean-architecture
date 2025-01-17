@@ -1,25 +1,25 @@
-# Android Homework Project
+# android-clean-architecture
 
-This project is a starter template for coding challenges typically given during technical interviews. It demonstrates my ability to implement modern Android development practices and showcases my skills with various frameworks and libraries.
+This project demonstrates Clean Architecture principles in an Android app.  The project highlights scalability, maintainability, and testability, making it a strong foundation for building robust Android applications.
 
 ## Features
 
-- **Architecture:** Implements the MVVM architecture for maintainable and testable code.
-- **UI:** Built with Jetpack Compose for declarative UI and Compose Navigation for seamless screen transitions.
-- **Networking:** Utilizes Retrofit for API calls to fetch data from the GitHub API.
-- **Dependency Injection:** Leverages Dagger Hilt for dependency management.
-- **Testing:** Includes unit tests with MockK and UI screenshot tests with Jetpack Compose.
-- **Modularization:** Follows a modularized approach to separate concerns and improve scalability.
+- **Architecture:** Implements MVVM architecture
+- **UI:** Built with Jetpack Compose for UI and Compose Navigation for screen transitions
+- **Networking:** Utilizes Retrofit for API calls to fetch data from the GitHub API
+- **Dependency Injection:** Leverages Dagger Hilt for dependency management
+- **Testing:** Includes unit tests with MockK and Compose UI screenshot tests with Espresso
+- **Modularization:** Follows a modularized approach to separate concerns and improve scalability
 
 ## Project Overview
 
 The app fetches a list of GitHub repositories from the [GitHub API](https://docs.github.com/en/rest) and displays them in a list. When a repository is tapped, the app navigates to a detailed view showing additional information about the selected repository.
 
-### Key Screens:
-1. **Repository List:** Displays a list of repositories with key details like name, description, and star count.
-2. **Repository Details:** Shows more detailed information about a specific repository, including contributors, readme, and other metadata.
+### Key Screens
+1. **Repository List:** Displays a list of repositories with key details like name, description, and star count
+2. **Repository Details:** Shows detailed information about a specific repository
 
-## Tech Stack
+## Libraries
 
 - **Language:** Kotlin
 - **UI Framework:** Jetpack Compose
@@ -27,7 +27,7 @@ The app fetches a list of GitHub repositories from the [GitHub API](https://docs
 - **Networking:** Retrofit
 - **Dependency Injection:** Dagger Hilt
 - **Architecture:** MVVM
-- **Testing:** MockK for unit testing, Jetpack Compose Screenshot Tests
+- **Testing:** MockK for unit testing, Jetpack Compose for screenshot tests
 - **Build System:** Gradle with Kotlin DSL
 
 ## Setup
@@ -38,33 +38,19 @@ The app fetches a list of GitHub repositories from the [GitHub API](https://docs
 ### Steps to Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/android-homework-project.git
+   git clone https://github.com/lmorda/android-clean-architecture.git
    ```
-2. Open the project in Android Studio.
-3. Sync Gradle.
-4. Run the app on an emulator or a physical device.
+2. Open the project in Android Studio
+3. Sync Gradle
+4. Run the app on an emulator or a physical device
 
 ## Modularization
 
 The project is organized into separate modules to improve code reusability and maintainability:
-- **App Module:** Contains the application entry point and common configurations.
-- **Domain Module:** Contains business logic and repository interface.
-- **Data Module:** Handles data fetching and repository implementation.
-- **UI Module:** Contains all UI components built with Jetpack Compose.
-
-## Libraries Used
-
-| Library                        | Purpose                                                   |
-|--------------------------------|-----------------------------------------------------------|
-| Jetpack Compose                | For building declarative UI                                |
-| Compose Navigation             | For in-app navigation                                     |
-| Compose Screenshot Tests | For UI verification via screenshot testing              |
-| Retrofit                        | For making network requests                               |
-| Timber                          | For logging                                              |
-| Dagger Hilt                    | For dependency injection                                  |
-| MockK                           | For mocking dependencies in unit tests                   |
-| Kotlin                          | Primary programming language                              |
-
+- **App Module:** Contains the application, main activity, and navigation host
+- **Domain Module:** Contains DTOs and repository interface
+- **Data Module:** Handles data fetching and repository implementation
+- **UI Module:** Contains all UI components built with Jetpack Compose
 
 ## Clean Architecture
 
@@ -72,11 +58,9 @@ This project adheres to clean architecture principles to ensure clear separation
 <img width="1243" alt="Screenshot 2025-01-16 at 8 56 30 AM" src="https://github.com/user-attachments/assets/f0bc299f-e7ef-434c-a8c5-76f54d87e54d" />
 Note: UseCases were not utilized in this project due to its small scope.
 
-## Testing
-
-This project includes:
-- **Unit Tests:** Using MockK to mock dependencies and ensure robust ViewModel testing.
-- **UI Tests:** Jetpack Compose screenshot tests to verify UI consistency across changes.
+## Asset Acknowledgement
+https://www.flaticon.com/authors/agung-rama
+https://lottiefiles.com/
 
 ## License
 
