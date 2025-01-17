@@ -1,10 +1,10 @@
 # Android Homework Project
 
-This project is a starter template for coding challenges typically given during technical interviews. It demonstrates my ability to implement modern Android development practices and showcases my skills with various frameworks and libraries.
+This project serves as a starter template for coding challenges commonly encountered during technical interviews. It highlights my ability to implement modern Android development practices and demonstrates proficiency with various frameworks and libraries. Although relatively small in scope, it employs a multi-module clean architecture to showcase my expertise in designing scalable and maintainable code.
 
 ## Features
 
-- **Architecture:** Implements the MVVM architecture for maintainable and testable code.
+- **Architecture:** Implements a clean MVVM architecture for maintainable and testable code.
 - **UI:** Built with Jetpack Compose for declarative UI and Compose Navigation for seamless screen transitions.
 - **Networking:** Utilizes Retrofit for API calls to fetch data from the GitHub API.
 - **Dependency Injection:** Leverages Dagger Hilt for dependency management.
