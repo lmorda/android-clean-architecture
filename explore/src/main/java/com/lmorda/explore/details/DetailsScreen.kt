@@ -102,7 +102,6 @@ fun DetailsScreen(
         ) {
             when {
                 state.exception != null -> DetailsLoadingError()
-
                 state.githubRepo != null -> DetailsContent(details = state.githubRepo)
             }
         }

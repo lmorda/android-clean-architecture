@@ -4,5 +4,5 @@
     <dimen name="standard">32dp</dimen>
     <dimen name="medium_large">48dp</dimen>
     <dimen name="large">64dp</dimen>
-    <dimen name="xlarge">256dp</dimen>
+    <dimen name="xlarge">128dp</dimen>
 </resources>
