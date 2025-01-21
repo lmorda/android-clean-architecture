@@ -66,7 +66,8 @@ Note: UseCases were not utilized in this project due to its small scope.
 
 ## Asset Acknowledgement
 
-Shoutout to Agung Rama for the app icon:
+Thanks to Agung Rama for the app icon:
+
 https://www.flaticon.com/authors/agung-rama
 
 ## License
