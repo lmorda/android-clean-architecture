@@ -43,7 +43,7 @@ internal fun RepositoryStats(details: GithubRepo) {
         )
         Text(
             modifier = Modifier.padding(horizontal = mediumSize),
-            text = details.stargazersCount,
+            text = countPrettyString(details.stargazersCount),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
         )
@@ -55,7 +55,7 @@ internal fun RepositoryStats(details: GithubRepo) {
         )
         Text(
             modifier = Modifier.padding(start = mediumSize),
-            text = details.language.takeIf { it.isNotBlank() }
+            text = details.language?.takeIf { it.isNotBlank() }
                 ?: stringResource(R.string.informational_repo),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
@@ -64,8 +64,8 @@ internal fun RepositoryStats(details: GithubRepo) {
 }
 
 @Composable
-fun getLanguageTintColor(language: String): Color =
-    language.takeIf { it.isNotBlank() }
+fun getLanguageTintColor(language: String?): Color =
+    language?.takeIf { it.isNotBlank() }
         ?.firstOrNull()
         ?.lowercaseChar()
         ?.let { char ->
@@ -77,3 +77,12 @@ fun getLanguageTintColor(language: String): Color =
                 else -> Pink80
             }
         } ?: Pink80
+
+private fun countPrettyString(value: Int?): String {
+    if (value == null) return ""
+    return when {
+        value >= 1_000_000 -> "${"%.1f".format(value / 1_000_000.0)}M"
+        value >= 1_000 -> "${"%.1f".format(value / 1_000.0)}k"
+        else -> value.toString()
+    }
+}

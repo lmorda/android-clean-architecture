@@ -4,19 +4,17 @@ val mockDomainData = listOf(
     GithubRepo(
         id = 0,
         name = "my-application",
-        fullName = "My Application",
         owner = Owner("google", "", ""),
         description = "description for google my application",
-        stargazersCount = "3.45k",
-        language = "kotlin",
+        stargazersCount = 345123,
+        language = "Kotlin",
     ),
     GithubRepo(
         id = 1,
         name = "my-application-2",
-        fullName = "My Application 2",
         owner = Owner("google", "", ""),
         description = "description for google my application 2",
-        stargazersCount = "3.45k",
-        language = "kotlin",
+        stargazersCount = 1234,
+        language = "Java",
     ),
 )

@@ -17,25 +17,15 @@ class GithubRepoMapper @Inject constructor() {
         with(githubRepoDto) {
             GithubRepo(
                 id = id,
-                name = name ?: "",
-                fullName = fullName ?: "",
+                name = name,
                 owner = Owner(
-                    login = owner?.login ?: "",
-                    avatarUrl = owner?.avatarUrl ?: "",
-                    htmlUrl = owner?.htmlUrl ?: "",
+                    login = owner.login,
+                    avatarUrl = owner.avatarUrl,
+                    htmlUrl = owner.htmlUrl,
                 ),
-                description = description ?: "",
-                stargazersCount = countPrettyString(stargazersCount),
-                language = language ?: "",
+                description = description,
+                stargazersCount = stargazersCount,
+                language = language,
             )
         }
-
-    private fun countPrettyString(value: Int?): String {
-        if (value == null) return ""
-        return when {
-            value >= 1_000_000 -> "${"%.1f".format(value / 1_000_000.0)}M"
-            value >= 1_000 -> "${"%.1f".format(value / 1_000.0)}k"
-            else -> value.toString()
-        }
-    }
 }

@@ -32,9 +32,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
@@ -50,7 +52,6 @@ import com.lmorda.design.theme.topAppBarColors
 import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
 import com.lmorda.explore.R
-import com.lmorda.explore.shared.AvatarImage
 import com.lmorda.explore.shared.RepositoryStats
 
 @Composable
@@ -229,7 +230,7 @@ private fun ExploreItem(details: GithubRepo, onNavigateToDetails: (Long) -> Unit
 
         Text(
             modifier = Modifier.padding(top = smallSize),
-            text = details.description,
+            text = details.description.orEmpty(),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
             maxLines = 3,
@@ -251,12 +252,14 @@ private fun ExploreItemTitle(details: GithubRepo) {
             .background(color = MaterialTheme.colorScheme.background),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            AvatarImage(
+            AsyncImage(
                 modifier = Modifier
                     .size(size = largeSize)
                     .clip(shape = CircleShape),
-                avatarUrl = details.owner.avatarUrl,
-                size = largeSize,
+                model = details.owner.avatarUrl,
+                placeholder = painterResource(id = R.drawable.ic_android_green_24dp),
+                error = painterResource(id = R.drawable.ic_android_green_24dp),
+                contentDescription = "avatar",
             )
             Text(
                 modifier = Modifier.padding(start = mediumSize),

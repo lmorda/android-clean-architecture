@@ -26,7 +26,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import coil3.compose.AsyncImage
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
@@ -41,7 +43,6 @@ import com.lmorda.design.theme.xLargeSize
 import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
 import com.lmorda.explore.R
-import com.lmorda.explore.shared.AvatarImage
 import com.lmorda.explore.shared.RepositoryStats
 import com.lmorda.utils.shareText
 
@@ -110,13 +111,15 @@ fun DetailsScreen(
 
 @Composable
 fun ColumnScope.DetailsContent(details: GithubRepo) {
-    AvatarImage(
+    AsyncImage(
         modifier = Modifier
             .align(alignment = Alignment.CenterHorizontally)
             .size(size = xLargeSize)
             .clip(shape = CircleShape),
-        avatarUrl = details.owner.avatarUrl,
-        size = xLargeSize,
+         model = details.owner.avatarUrl,
+        placeholder = painterResource(id = R.drawable.ic_android_green_24dp),
+        error = painterResource(id = R.drawable.ic_android_green_24dp),
+        contentDescription = "avatar",
     )
     Text(
         text = details.owner.login,
@@ -132,7 +135,7 @@ fun ColumnScope.DetailsContent(details: GithubRepo) {
     )
     Text(
         modifier = Modifier.padding(top = standardSize),
-        text = details.description,
+        text = details.description.orEmpty(),
         style = MaterialTheme.typography.titleLarge,
         color = MaterialTheme.colorScheme.onBackground,
     )

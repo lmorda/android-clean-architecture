@@ -28,7 +28,13 @@ class ExploreScreenTest {
         }
 
         composeTestRule.onNodeWithText("my-application").assertIsDisplayed()
+        composeTestRule.onNodeWithText("description for google my application").assertIsDisplayed()
+        composeTestRule.onNodeWithText("345.1k").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Kotlin").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("my-application-2").assertIsDisplayed()
+        composeTestRule.onNodeWithText("description for google my application 2").assertIsDisplayed()
+        composeTestRule.onNodeWithText("1.2k").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Java").assertIsDisplayed()
     }
 }
-
