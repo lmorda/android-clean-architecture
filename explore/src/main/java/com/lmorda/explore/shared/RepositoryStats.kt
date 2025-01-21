@@ -79,7 +79,7 @@ fun getLanguageTintColor(language: String?): Color =
         } ?: Pink80
 
 private fun countPrettyString(value: Int?): String {
-    if (value == null) return ""
+    if (value == null) return "0"
     return when {
         value >= 1_000_000 -> "${"%.1f".format(value / 1_000_000.0)}M"
         value >= 1_000 -> "${"%.1f".format(value / 1_000.0)}k"
